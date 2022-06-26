@@ -18,12 +18,10 @@
 
 using namespace ns3;
 
-NS_LOG_COMPONENT_DEFINE ("ScratchSimulator");
+NS_LOG_COMPONENT_DEFINE ("HelloSimulator");
 
-int 
+int
 main (int argc, char *argv[])
 {
-  NS_LOG_UNCOND ("Scratch Simulator");
-  CommandLine cmd;
-  cmd.Parse (argc, argv);
+  NS_LOG_UNCOND ("Hello Simulator");
 }
