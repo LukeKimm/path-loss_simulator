@@ -44,7 +44,7 @@
 #include "ns3/ipv4-address-helper.h"
 #include "ns3/ipv4-interface-container.h"
 #include <iostream>
-// #include "ns3/bsm-application.h"
+#include "ns3/bsm-application.h"
 #include "ns3/random-variable-stream.h"
 
 #include "ns3/ocb-wifi-mac.h"
@@ -120,7 +120,7 @@ int main (int argc, char *argv[])
 
 
   NodeContainer c;
-  // create 4 nodes
+  // create 10 nodes
   c.Create (10);
 
   // using WAVE
@@ -146,7 +146,7 @@ int main (int argc, char *argv[])
   // Tracing
   wifiPhy.EnablePcap ("wave-simple-80211p", devices);
 
-  // make random number for place random nodes
+  // make random number for modify the places of random nodes
   RngSeedManager::SetSeed (3);  // Changes seed from default of 1 to 3
   RngSeedManager::SetRun (7);   // Changes run number from default of 1 to 7
   // Now, create random variables
@@ -185,6 +185,9 @@ int main (int argc, char *argv[])
   InetSocketAddress remote = InetSocketAddress (Ipv4Address ("255.255.255.255"), 80);
   source->SetAllowBroadcast (true);
   source->Connect (remote);
+
+  // check the CBR(channel busy ratio)
+  BsmApplication
 
   Simulator::ScheduleWithContext (source->GetNode ()->GetId (),
                                   Seconds (1.0), &GenerateTraffic,

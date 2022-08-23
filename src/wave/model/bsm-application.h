@@ -152,6 +152,13 @@ private:
    */
   Ptr<NetDevice> GetNetDevice (int id);
 
+  /**
+   * \brief call every 100ms and record if the channel was CCA busy or not using the IsStateCcaBusy method. 
+   * \param nodeID the id of the desired net device
+   * \return ptr to the desired net device
+   */
+  void ifCCAbusy(uint32_t nodeID);
+
   Ptr<WaveBsmStats> m_waveBsmStats; ///< BSM stats
   /// tx safety range squared, for optimization
   std::vector <double> m_txSafetyRangesSq;
