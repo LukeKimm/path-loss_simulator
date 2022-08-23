@@ -24,4 +24,9 @@ int
 main (int argc, char *argv[])
 {
   NS_LOG_UNCOND ("Hello Simulator");
+
+  Simulator::Run();
+  Simulator::Destroy();
+
 }
+

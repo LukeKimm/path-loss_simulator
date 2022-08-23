@@ -44,6 +44,8 @@
 #include "ns3/ipv4-address-helper.h"
 #include "ns3/ipv4-interface-container.h"
 #include <iostream>
+// #include "ns3/bsm-application.h"
+#include "ns3/random-variable-stream.h"
 
 #include "ns3/ocb-wifi-mac.h"
 #include "ns3/wifi-80211p-helper.h"
@@ -73,6 +75,37 @@ NS_LOG_COMPONENT_DEFINE ("WifiSimpleOcb");
  * 802.11p standard has been done in wifi module, so we only need a high
  * MAC class that enables OCB mode.
  */
+
+// void BsmApplication::ifCCAbusy(uint32_t nodeID)
+// {
+//    Ptr<WifiNetDevice> device = DynamicCast<WifiNetDevice>(GetNode(nodeID)->GetDevice(0));
+//    // more than 1 device can be at each node so take the 1st one
+
+//    Ptr<WifiPhy> phy = device->GetPhy ();
+
+//    Ptr <YansWifiPhy> wfc = phy->GetObject<YansWifiPhy> ();
+
+//    // Ptr <WifiPhyStateHelper> statehelper = phy->GetState();
+
+//    PointerValue ptr;
+//    wfc->GetAttribute("State", ptr);
+//    Ptr<WifiPhyStateHelper> wpsh = ptr.Get<WifiPhyStateHelper>();
+
+//    std::cerr<<"CCA state for node "<<nodeID<<" is "<<wpsh->IsStateCcaBusy()()<<std::endl;
+
+//    if (wpsh->IsStateCcaBusy() == true )
+//    {
+//      CBRTime[nodeID].push_back(1);
+//    }
+//    else
+//    {
+//      CBRTime[nodeID].push_back(0);
+//    }
+
+//    CBRreviewInstants[nodeID] = Simulator::Schedule (//recvSink->GetNode ()->GetId (), //BIPLAV
+//                                      CBRcheckInterval, &BsmApplication::ifCCAbusy, this,
+//                                      nodeID);
+// }
 
 void ReceivePacket (Ptr<Socket> socket)
 {
@@ -118,10 +151,10 @@ int main (int argc, char *argv[])
 
 
   NodeContainer c;
-  c.Create (2);
+  // create 4 nodes
+  c.Create (10);
 
-  ///////////////////////////// 이부분 때문에 웨이브를 사용했다고 할 수 있다. //////////////////////////////////////////
-
+  // using WAVE
   // The below set of helpers will help us to put together the wifi NICs we want
   YansWifiPhyHelper wifiPhy =  YansWifiPhyHelper::Default ();
   YansWifiChannelHelper wifiChannel = YansWifiChannelHelper::Default ();
@@ -144,13 +177,22 @@ int main (int argc, char *argv[])
   // Tracing
   wifiPhy.EnablePcap ("wave-simple-80211p", devices);
 
+  // make random number for place random nodes
+  RngSeedManager::SetSeed (3);  // Changes seed from default of 1 to 3
+  RngSeedManager::SetRun (7);   // Changes run number from default of 1 to 7
+  // Now, create random variables
+  Ptr<UniformRandomVariable> x = CreateObject<UniformRandomVariable> ();
+
   MobilityHelper mobility;
   Ptr<ListPositionAllocator> positionAlloc = CreateObject<ListPositionAllocator> ();
-  positionAlloc->Add (Vector (0.0, 0.0, 0.0));
-  positionAlloc->Add (Vector (5.0, 0.0, 0.0));
-  mobility.SetPositionAllocator (positionAlloc);
-  mobility.SetMobilityModel ("ns3::ConstantPositionMobilityModel");
-  mobility.Install (c);
+  // locate nodes
+  for (int i = 0; i < 9; i++){
+    positionAlloc->Add (Vector (0.0, 5.0, 0.0));
+    positionAlloc->Add (Vector (i*5.0, 0.0, 0.0));
+    mobility.SetPositionAllocator (positionAlloc);
+    mobility.SetMobilityModel ("ns3::ConstantPositionMobilityModel");
+    mobility.Install (c);
+  }
 
   InternetStackHelper internet;
   internet.Install (c);
@@ -161,12 +203,16 @@ int main (int argc, char *argv[])
   Ipv4InterfaceContainer i = ipv4.Assign (devices);
 
   TypeId tid = TypeId::LookupByName ("ns3::UdpSocketFactory");
-  Ptr<Socket> recvSink = Socket::CreateSocket (c.Get (0), tid);
-  InetSocketAddress local = InetSocketAddress (Ipv4Address::GetAny (), 80);
-  recvSink->Bind (local);
-  recvSink->SetRecvCallback (MakeCallback (&ReceivePacket));
 
-  Ptr<Socket> source = Socket::CreateSocket (c.Get (1), tid);
+  // give sockets to nodes
+  for (int j = 0; j < 9; j++){ 
+    Ptr<Socket> recvSink = Socket::CreateSocket (c.Get (j), tid);
+    InetSocketAddress local = InetSocketAddress (Ipv4Address::GetAny (), 80);
+    recvSink->Bind (local);
+    recvSink->SetRecvCallback (MakeCallback (&ReceivePacket));
+  }
+
+  Ptr<Socket> source = Socket::CreateSocket (c.Get (9), tid);
   InetSocketAddress remote = InetSocketAddress (Ipv4Address ("255.255.255.255"), 80);
   source->SetAllowBroadcast (true);
   source->Connect (remote);

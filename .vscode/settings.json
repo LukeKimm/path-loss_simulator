@@ -64,5 +64,6 @@
         "future": "cpp",
         "mutex": "cpp",
         "variant": "cpp"
-    }
+    },
+    "C_Cpp.errorSquiggles": "Disabled"
 }
