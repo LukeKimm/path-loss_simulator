@@ -85,7 +85,7 @@ void ReceivePacket (Ptr<Socket> socket)
 }
 
 static void GenerateTraffic (Ptr<Socket> socket, uint32_t pktSize,
-                             uint32_t pktCount, Time pktInterval )
+                             uint32_t pktCount, Time pktInterval)
 {
   if (pktCount > 0)
     {
