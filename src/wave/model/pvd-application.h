@@ -159,17 +159,17 @@ private:
    */
   void ifCCAbusy(uint32_t nodeID);
 
-  // 이부분이 .cc파일에서 넘어오는 부분으로 수정이 좀 필요할것.
+  // pvd-application.cc의 header파일 부분
   Ptr<WavePvdStats> m_wavePvdStats; ///< PVD stats
   /// tx safety range squared, for optimization
-  std::vector <double> m_txSafetyRangesSq;
+  // std::vector <double> m_txSafetyRangesSq;
   Time m_TotalSimTime; ///< total sim time
   uint32_t m_wavePacketSize; ///< bytes
   uint32_t m_numWavePackets; ///< number of wave packets
   Time m_waveInterval; ///< wave interval
   double m_gpsAccuracyNs; ///< GPS accuracy
   Ipv4InterfaceContainer * m_adhocTxInterfaces; ///< transmit interfaces
-  std::vector<int> * m_nodesMoving; ///< nodes moving
+  // std::vector<int> * m_nodesMoving; ///< nodes moving
   Ptr<UniformRandomVariable> m_unirv; ///< random variable
   int m_nodeId; ///< node ID
   /// WAVE channel access mode.  0=continuous PHY; 1=channel-switching
