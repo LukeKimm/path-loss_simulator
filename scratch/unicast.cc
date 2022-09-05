@@ -177,7 +177,7 @@ int main (int argc, char *argv[])
   TypeId tid = TypeId::LookupByName ("ns3::UdpSocketFactory");
 
   // give sockets to nodes
-  for (int j = 1; j < 46; j++){ 
+  for (int j = 1; j < 2; j++){ 
     Ptr<Socket> recvSink = Socket::CreateSocket (c.Get (j), tid);
     InetSocketAddress local = InetSocketAddress (Ipv4Address::GetAny (), 80);
     recvSink->Bind (local);
@@ -196,7 +196,7 @@ int main (int argc, char *argv[])
                                   Seconds (1.0), &GenerateTraffic,
                                   source, packetSize, numPackets, interPacketInterval);
 
-  AnimationInterface anim ("broadcast.xml");
+  AnimationInterface anim ("unicast.xml");
 
   Simulator::Run ();
   Simulator::Destroy ();

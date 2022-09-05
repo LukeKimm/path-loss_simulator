@@ -157,7 +157,7 @@ private:
    * \param nodeID the id of the desired net device
    * \return ptr to the desired net device
    */
-  void ifCCAbusy(uint32_t nodeID);
+  // void ifCCAbusy(uint32_t nodeID);
 
   Ptr<WaveBsmStats> m_waveBsmStats; ///< BSM stats
   /// tx safety range squared, for optimization

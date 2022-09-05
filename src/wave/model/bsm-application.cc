@@ -407,35 +407,35 @@ BsmApplication::GetNetDevice (int id)
   return device;
 }
 
-void BsmApplication::ifCCAbusy(uint32_t nodeID)
-{
-   Ptr<WifiNetDevice> device = DynamicCast<WifiNetDevice>(GetNode(nodeID)->GetDevice(0));
-   // more than 1 device can be at each node so take the 1st one
+// void BsmApplication::ifCCAbusy(uint32_t nodeID)
+// {
+//    Ptr<WifiNetDevice> device = DynamicCast<WifiNetDevice>(GetNode(nodeID)->GetDevice(0));
+//    // more than 1 device can be at each node so take the 1st one
 
-   Ptr<WifiPhy> phy = device->GetPhy ();
+//    Ptr<WifiPhy> phy = device->GetPhy ();
 
-   Ptr <YansWifiPhy> wfc = phy->GetObject<YansWifiPhy> ();
+//    Ptr <YansWifiPhy> wfc = phy->GetObject<YansWifiPhy> ();
 
-   // Ptr <WifiPhyStateHelper> statehelper = phy->GetState();
+//    // Ptr <WifiPhyStateHelper> statehelper = phy->GetState();
 
-   PointerValue ptr;
-   wfc->GetAttribute("State", ptr);
-   Ptr<WifiPhyStateHelper> wpsh = ptr.Get<WifiPhyStateHelper>();
+//    PointerValue ptr;
+//    wfc->GetAttribute("State", ptr);
+//    Ptr<WifiPhyStateHelper> wpsh = ptr.Get<WifiPhyStateHelper>();
 
-   std::cerr<<"CCA state for node "<<nodeID<<" is "<<wpsh->IsStateCcaBusy()()<<std::endl;
+//    std::cerr<<"CCA state for node "<<nodeID<<" is "<<wpsh->IsStateCcaBusy()()<<std::endl;
 
-   if (wpsh->IsStateCcaBusy() == true )
-   {
-     CBRTime[nodeID].push_back(1);
-   }
-   else
-   {
-     CBRTime[nodeID].push_back(0);
-   }
+//    if (wpsh->IsStateCcaBusy() == true )
+//    {
+//      CBRTime[nodeID].push_back(1);
+//    }
+//    else
+//    {
+//      CBRTime[nodeID].push_back(0);
+//    }
 
-   CBRreviewInstants[nodeID] = Simulator::Schedule (//recvSink->GetNode ()->GetId (), //BIPLAV
-                                     CBRcheckInterval, &BsmApplication::ifCCAbusy, this,
-                                     nodeID);
-}
+//    CBRreviewInstants[nodeID] = Simulator::Schedule (//recvSink->GetNode ()->GetId (), //BIPLAV
+//                                      CBRcheckInterval, &BsmApplication::ifCCAbusy, this,
+//                                      nodeID);
+// }
 
 } // namespace ns3

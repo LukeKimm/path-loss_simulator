@@ -44,9 +44,6 @@
 #include "ns3/ipv4-address-helper.h"
 #include "ns3/ipv4-interface-container.h"
 #include <iostream>
-// #include "ns3/bsm-application.h"
-#include "ns3/random-variable-stream.h"
-#include "ns3/netanim-module.h"
 
 #include "ns3/ocb-wifi-mac.h"
 #include "ns3/wifi-80211p-helper.h"
@@ -86,7 +83,7 @@ void ReceivePacket (Ptr<Socket> socket)
 }
 
 static void GenerateTraffic (Ptr<Socket> socket, uint32_t pktSize,
-                             uint32_t pktCount, Time pktInterval)
+                             uint32_t pktCount, Time pktInterval )
 {
   if (pktCount > 0)
     {
@@ -121,10 +118,10 @@ int main (int argc, char *argv[])
 
 
   NodeContainer c;
-  // create 10 nodes
-  c.Create (46);
+  c.Create (2);
 
-  // using WAVE
+  ///////////////////////////// 이부분 때문에 웨이브를 사용했다고 할 수 있다. //////////////////////////////////////////
+
   // The below set of helpers will help us to put together the wifi NICs we want
   YansWifiPhyHelper wifiPhy =  YansWifiPhyHelper::Default ();
   YansWifiChannelHelper wifiChannel = YansWifiChannelHelper::Default ();
@@ -147,24 +144,13 @@ int main (int argc, char *argv[])
   // Tracing
   wifiPhy.EnablePcap ("wave-simple-80211p", devices);
 
-  // // make random number for modify the places of random nodes
-  // RngSeedManager::SetSeed (3);  // Changes seed from default of 1 to 3
-  // RngSeedManager::SetRun (7);   // Changes run number from default of 1 to 7
-  // // Now, create random variables
-  // Ptr<UniformRandomVariable> x = CreateObject<UniformRandomVariable> ();
-
   MobilityHelper mobility;
   Ptr<ListPositionAllocator> positionAlloc = CreateObject<ListPositionAllocator> ();
-  // locate nodes
-  positionAlloc->Add (Vector (4.0, 8.0, 0.0));
-  for (int i = 0; i < 9; i++){
-    for (int k = 0; k < 5; k++){
-      positionAlloc->Add (Vector (i*1.0, k*1.0, 0.0));
-      mobility.SetPositionAllocator (positionAlloc);
-      mobility.SetMobilityModel ("ns3::ConstantPositionMobilityModel");
-      mobility.Install (c);
-    }
-  }
+  positionAlloc->Add (Vector (0.0, 0.0, 0.0));
+  positionAlloc->Add (Vector (5.0, 0.0, 0.0));
+  mobility.SetPositionAllocator (positionAlloc);
+  mobility.SetMobilityModel ("ns3::ConstantPositionMobilityModel");
+  mobility.Install (c);
 
   InternetStackHelper internet;
   internet.Install (c);
@@ -175,28 +161,19 @@ int main (int argc, char *argv[])
   Ipv4InterfaceContainer i = ipv4.Assign (devices);
 
   TypeId tid = TypeId::LookupByName ("ns3::UdpSocketFactory");
+  Ptr<Socket> recvSink = Socket::CreateSocket (c.Get (0), tid);
+  InetSocketAddress local = InetSocketAddress (Ipv4Address::GetAny (), 80);
+  recvSink->Bind (local);
+  recvSink->SetRecvCallback (MakeCallback (&ReceivePacket));
 
-  // give sockets to nodes
-  for (int j = 1; j < 46; j++){ 
-    Ptr<Socket> recvSink = Socket::CreateSocket (c.Get (j), tid);
-    InetSocketAddress local = InetSocketAddress (Ipv4Address::GetAny (), 80);
-    recvSink->Bind (local);
-    recvSink->SetRecvCallback (MakeCallback (&ReceivePacket));
-  }
-
-  Ptr<Socket> source = Socket::CreateSocket (c.Get (0), tid);
+  Ptr<Socket> source = Socket::CreateSocket (c.Get (1), tid);
   InetSocketAddress remote = InetSocketAddress (Ipv4Address ("255.255.255.255"), 80);
   source->SetAllowBroadcast (true);
   source->Connect (remote);
 
-  // check the CBR(channel busy ratio)
-  // BsmApplication
-
   Simulator::ScheduleWithContext (source->GetNode ()->GetId (),
                                   Seconds (1.0), &GenerateTraffic,
                                   source, packetSize, numPackets, interPacketInterval);
-
-  AnimationInterface anim ("broadcast.xml");
 
   Simulator::Run ();
   Simulator::Destroy ();
