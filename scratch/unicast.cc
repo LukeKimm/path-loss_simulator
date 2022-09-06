@@ -177,7 +177,7 @@ int main (int argc, char *argv[])
   TypeId tid = TypeId::LookupByName ("ns3::UdpSocketFactory");
 
   // give sockets to nodes
-  for (int j = 1; j < 2; j++){ 
+  for (int j = 1; j < 46; j++){ 
     Ptr<Socket> recvSink = Socket::CreateSocket (c.Get (j), tid);
     InetSocketAddress local = InetSocketAddress (Ipv4Address::GetAny (), 80);
     recvSink->Bind (local);
@@ -188,6 +188,11 @@ int main (int argc, char *argv[])
   InetSocketAddress remote = InetSocketAddress (Ipv4Address ("255.255.255.255"), 80);
   source->SetAllowBroadcast (true);
   source->Connect (remote);
+
+  const char *  RSU_addr = "10.1.1.1";
+  Ptr<Socket> source = Socket::CreateSocket (c.Get (0), tid);
+  InetSocketAddress RSU = InetSocketAddress (Ipv4Address (RSU_addr), 80);
+  source->Connect (RSU);
 
   // check the CBR(channel busy ratio)
   // BsmApplication
