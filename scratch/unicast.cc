@@ -121,7 +121,7 @@ int main (int argc, char *argv[])
 
 
   NodeContainer c;
-  // create 10 nodes
+  // create 46 nodes
   c.Create (46);
 
   // using WAVE
@@ -176,7 +176,7 @@ int main (int argc, char *argv[])
 
   TypeId tid = TypeId::LookupByName ("ns3::UdpSocketFactory");
 
-  // give sockets to nodes
+  // give sockets to nodes(OBU)
   for (int j = 1; j < 46; j++){ 
     Ptr<Socket> recvSink = Socket::CreateSocket (c.Get (j), tid);
     InetSocketAddress local = InetSocketAddress (Ipv4Address::GetAny (), 80);
@@ -184,14 +184,16 @@ int main (int argc, char *argv[])
     recvSink->SetRecvCallback (MakeCallback (&ReceivePacket));
   }
 
-  // Ptr<Socket> source = Socket::CreateSocket (c.Get (0), tid);
-  // InetSocketAddress remote = InetSocketAddress (Ipv4Address ("255.255.255.255"), 80);
-  // source->SetAllowBroadcast (true);
-  // source->Connect (remote);
+  //give socket to RSU and send broadcast message
+  Ptr<Socket> source = Socket::CreateSocket (c.Get (0), tid);
+  InetSocketAddress remote = InetSocketAddress (Ipv4Address ("255.255.255.255"), 80);
+  source->SetAllowBroadcast (true);
+  source->Connect (remote);
 
+  // unicast(setting RSU)
   // const char *  RSU_addr = "10.1.1.1";
   Ptr<Socket> source = Socket::CreateSocket (c.Get (0), tid);
-  InetSocketAddress RSU = InetSocketAddress (Ipv4Address ("10.1.1.1"), 80);
+  InetSocketAddress RSU = InetSocketAddress (i.GetAddress (1), 80);
   source->Connect (RSU);
 
   // check the CBR(channel busy ratio)
