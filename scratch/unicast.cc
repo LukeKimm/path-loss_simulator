@@ -182,7 +182,7 @@ int main (int argc, char *argv[])
     InetSocketAddress local = InetSocketAddress (Ipv4Address::GetAny (), 80);
     recvSink->SetAllowBroadcast (true);
     recvSink->Bind (local);
-    recvSink->SetRecvCallback (MakeCallback (&ReceivePacket));
+    // recvSink->SetRecvCallback (MakeCallback (&ReceivePacket));
   }
 
   //give socket to RSU and send broadcast message
@@ -190,6 +190,8 @@ int main (int argc, char *argv[])
   InetSocketAddress remote = InetSocketAddress (Ipv4Address ("255.255.255.255"), 80);
   // source->SetAllowBroadcast (true);
   source->Connect (remote);
+  source->SetRecvCallback (MakeCallback (&ReceivePacket));
+
 
   // // unicast(setting RSU)
   // // const char *  RSU_addr = "10.1.1.1";
