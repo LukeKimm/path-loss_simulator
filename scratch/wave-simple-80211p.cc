@@ -44,6 +44,8 @@
 #include "ns3/ipv4-address-helper.h"
 #include "ns3/ipv4-interface-container.h"
 #include <iostream>
+#include "ns3/random-variable-stream.h"
+#include "ns3/netanim-module.h"
 
 #include "ns3/ocb-wifi-mac.h"
 #include "ns3/wifi-80211p-helper.h"
@@ -174,6 +176,8 @@ int main (int argc, char *argv[])
   Simulator::ScheduleWithContext (source->GetNode ()->GetId (),
                                   Seconds (1.0), &GenerateTraffic,
                                   source, packetSize, numPackets, interPacketInterval);
+
+  AnimationInterface anim ("wavetest.xml");
 
   Simulator::Run ();
   Simulator::Destroy ();

@@ -19,6 +19,7 @@
 #include "ns3/internet-module.h"
 #include "ns3/point-to-point-module.h"
 #include "ns3/applications-module.h"
+#include "ns3/netanim-module.h"
 
 // Default Network Topology
 //
@@ -77,7 +78,9 @@ main (int argc, char *argv[])
   clientApps.Start (Seconds (2.0));
   clientApps.Stop (Seconds (10.0));
 
-  pointToPoint.EnablePcapAll("myfirst");
+  // pointToPoint.EnablePcapAll("myfirst");
+
+  AnimationInterface anim ("first.xml");
 
   Simulator::Run ();
   Simulator::Destroy ();

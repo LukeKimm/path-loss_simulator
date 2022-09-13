@@ -180,25 +180,27 @@ int main (int argc, char *argv[])
   for (int j = 1; j < 46; j++){ 
     Ptr<Socket> recvSink = Socket::CreateSocket (c.Get (j), tid);
     InetSocketAddress local = InetSocketAddress (Ipv4Address::GetAny (), 80);
-    recvSink->SetAllowBroadcast (true);
+    // InetSocketAddress local = InetSocketAddress (i.GetAddress (j + 1), 80);
+    // recvSink->SetAllowBroadcast (true);
     recvSink->Bind (local);
-    // recvSink->SetRecvCallback (MakeCallback (&ReceivePacket));
+    recvSink->SetRecvCallback (MakeCallback (&ReceivePacket));
   }
-
-  //give socket to RSU and send broadcast message
-  Ptr<Socket> source = Socket::CreateSocket (c.Get (0), tid);
-  InetSocketAddress remote = InetSocketAddress (Ipv4Address ("255.255.255.255"), 80);
-  // source->SetAllowBroadcast (true);
-  source->Connect (remote);
-  source->SetRecvCallback (MakeCallback (&ReceivePacket));
-
 
   // // unicast(setting RSU)
   // // const char *  RSU_addr = "10.1.1.1";
   // Ptr<Socket> source = Socket::CreateSocket (c.Get (0), tid);
   // InetSocketAddress RSU = InetSocketAddress (i.GetAddress (1), 80);
+  // source->SetAllowBroadcast (true);
   // source->Connect (RSU);
+  // // source->SetRecvCallback (MakeCallback (&ReceivePacket));
   // // WaveNetDevice 
+
+  //give socket to RSU and send broadcast message
+  Ptr<Socket> source = Socket::CreateSocket (c.Get (0), tid);
+  InetSocketAddress remote = InetSocketAddress (Ipv4Address ("255.255.255.255"), 80);
+  source->SetAllowBroadcast (true);
+  source->Connect (remote);
+  // source->SetRecvCallback (MakeCallback (&ReceivePacket));
 
   // check the CBR(channel busy ratio)
   // BsmApplication
