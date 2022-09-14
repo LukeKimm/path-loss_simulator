@@ -21,6 +21,7 @@
 #include "ns3/point-to-point-module.h"
 #include "ns3/applications-module.h"
 #include "ns3/ipv4-global-routing-helper.h"
+#include "netanim-module.h"
 
 // Default Network Topology
 //
@@ -108,6 +109,8 @@ main (int argc, char *argv[])
 
   pointToPoint.EnablePcapAll ("second");
   csma.EnablePcap ("second", csmaDevices.Get (1), true);
+
+  AnimationInterface anim ("unicast.xml");
 
   Simulator::Run ();
   Simulator::Destroy ();
