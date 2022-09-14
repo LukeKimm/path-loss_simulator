@@ -21,6 +21,7 @@
 #include "ns3/point-to-point-module.h"
 #include "ns3/applications-module.h"
 #include "ns3/stats-module.h"
+#include "ns3/netanim-module.h"
 
 using namespace ns3;
 
@@ -306,6 +307,10 @@ main (int argc, char *argv[])
   fileHelper.WriteProbe (probeType,
                          tracePath,
                          "OutputBytes");
+
+  AnimationInterface anim ("animation.xml");
+  anim.SetConstantPosition (nodes.Get(0), 1.0, 2.0);
+  anim.SetConstantPosition (nodes.Get(1), 4.0, 5.0);          
 
   Simulator::Stop (Seconds (20));
   Simulator::Run ();
