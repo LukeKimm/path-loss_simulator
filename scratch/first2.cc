@@ -15,6 +15,9 @@
  */
 
 #include "ns3/netanim-module.h"
+#include "ns3/mobility-model.h"
+#include "ns3/position-allocator.h"
+#include "ns3/mobility-helper.h"
 
 #include "ns3/core-module.h"
 #include "ns3/network-module.h"
@@ -56,6 +59,19 @@ main (int argc, char *argv[])
   NetDeviceContainer devices;
   devices = pointToPoint.Install (nodes);
 
+  MobilityHelper mobility;
+  Ptr<ListPositionAllocator> positionAlloc = CreateObject<ListPositionAllocator> ();
+  // locate nodes
+  positionAlloc->Add (Vector (4.0, 8.0, 0.0));
+  for (int i = 0; i < 9; i++){
+    for (int k = 0; k < 5; k++){
+      positionAlloc->Add (Vector (i*1.0, k*1.0, 0.0));
+      mobility.SetPositionAllocator (positionAlloc);
+      mobility.SetMobilityModel ("ns3::ConstantPositionMobilityModel");
+      mobility.Install (c);
+    }
+  }
+
   InternetStackHelper stack;
   stack.Install (nodes);
 
@@ -82,8 +98,6 @@ main (int argc, char *argv[])
   // pointToPoint.EnablePcapAll("myfirst");
 
   AnimationInterface anim ("animation.xml");
-  anim.SetConstantPosition (nodes.Get(0), 1.0, 2.0);
-  anim.SetConstantPosition (nodes.Get(1), 4.0, 5.0);
 
   Simulator::Run ();
   Simulator::Destroy ();
