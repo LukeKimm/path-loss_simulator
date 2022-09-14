@@ -18,10 +18,7 @@ DEFINES       = -DNS3_LOG_ENABLE -DQT_NO_DEBUG -DQT_PRINTSUPPORT_LIB -DQT_WIDGET
 CFLAGS        = -pipe -O2 -Wall -W -D_REENTRANT -fPIC $(DEFINES)
 CXXFLAGS      = -pipe -O2 -Wall -W -D_REENTRANT -fPIC $(DEFINES)
 INCPATH       = -I. -Iqtpropertybrowser/src -isystem /usr/include/x86_64-linux-gnu/qt5 -isystem /usr/include/x86_64-linux-gnu/qt5/QtPrintSupport -isystem /usr/include/x86_64-linux-gnu/qt5/QtWidgets -isystem /usr/include/x86_64-linux-gnu/qt5/QtGui -isystem /usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++
-# for linux
 QMAKE         = /usr/lib/qt5/bin/qmake
-# for Mac(install qt5 with homebrew)
-# QMAKE         = /opt/homebrew/opt/qt@5/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
 MKDIR         = mkdir -p

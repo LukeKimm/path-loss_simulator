@@ -14,12 +14,13 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+#include "ns3/netanim-module.h"
+
 #include "ns3/core-module.h"
 #include "ns3/network-module.h"
 #include "ns3/internet-module.h"
 #include "ns3/point-to-point-module.h"
 #include "ns3/applications-module.h"
-#include "ns3/netanim-module.h"
 
 // Default Network Topology
 //
@@ -80,9 +81,12 @@ main (int argc, char *argv[])
 
   // pointToPoint.EnablePcapAll("myfirst");
 
-  AnimationInterface anim ("first.xml");
+  AnimationInterface anim ("animation.xml");
+  anim.SetConstantPosition (nodes.Get(0), 1.0, 2.0);
+  anim.SetConstantPosition (nodes.Get(1), 4.0, 5.0);
 
   Simulator::Run ();
   Simulator::Destroy ();
+
   return 0;
 }

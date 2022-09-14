@@ -14,6 +14,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+#include "ns3/netanim-module.h"
 #include "ns3/core-module.h"
 #include "ns3/network-module.h"
 #include "ns3/csma-module.h"
@@ -108,6 +109,8 @@ main (int argc, char *argv[])
 
   pointToPoint.EnablePcapAll ("second");
   csma.EnablePcap ("second", csmaDevices.Get (1), true);
+
+  AnimationInterface anim ("second.xml");
 
   Simulator::Run ();
   Simulator::Destroy ();
