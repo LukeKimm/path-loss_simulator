@@ -48,7 +48,7 @@ main (int argc, char *argv[])
   LogComponentEnable ("UdpEchoClientApplication", LOG_LEVEL_INFO);
   LogComponentEnable ("UdpEchoServerApplication", LOG_LEVEL_INFO);
 
-  
+  //p2p only accepts 2 nodes.
   NodeContainer nodes;
   nodes.Create (2);
 

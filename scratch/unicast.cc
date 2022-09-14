@@ -178,6 +178,9 @@ int main (int argc, char *argv[])
 
   TypeId tid = TypeId::LookupByName ("ns3::UdpSocketFactory");
 
+  /* trying p2p start
+
+  // try p2p
   UdpEchoServerHelper echoServer (9);
 
   ApplicationContainer serverApps = echoServer.Install (c.Get (1));
@@ -193,42 +196,42 @@ int main (int argc, char *argv[])
   clientApps.Start (Seconds (2.0));
   clientApps.Stop (Seconds (10.0));
 
-  /* original unicast code start
+  trying p2p end */
 
-  // // give sockets to nodes(OBU)
-  // for (int j = 1; j < 46; j++){ 
-  //   Ptr<Socket> recvSink = Socket::CreateSocket (c.Get (j), tid);
-  //   InetSocketAddress local = InetSocketAddress (Ipv4Address::GetAny (), 80);
-  //   // InetSocketAddress local = InetSocketAddress (i.GetAddress (j + 1), 80);
-  //   // recvSink->SetAllowBroadcast (true);
-  //   recvSink->Bind (local);
-  //   recvSink->SetRecvCallback (MakeCallback (&ReceivePacket));
-  // }
 
-  // // // unicast(setting RSU)
-  // // // const char *  RSU_addr = "10.1.1.1";
-  // // Ptr<Socket> source = Socket::CreateSocket (c.Get (0), tid);
-  // // InetSocketAddress RSU = InetSocketAddress (i.GetAddress (1), 80);
-  // // source->SetAllowBroadcast (true);
-  // // source->Connect (RSU);
-  // // // source->SetRecvCallback (MakeCallback (&ReceivePacket));
-  // // // WaveNetDevice 
+  // /* original unicast code start
 
-  // //give socket to RSU and send broadcast message
+  // give sockets to nodes(OBU)
+  for (int j = 1; j < 46; j++){ 
+    Ptr<Socket> recvSink = Socket::CreateSocket (c.Get (j), tid);
+    InetSocketAddress local = InetSocketAddress (Ipv4Address::GetAny (), 80);
+    // InetSocketAddress local = InetSocketAddress (i.GetAddress (j + 1), 80);
+    // recvSink->SetAllowBroadcast (true);
+    recvSink->Bind (local);
+    recvSink->SetRecvCallback (MakeCallback (&ReceivePacket));
+  }
+
+  // // unicast(setting RSU)
+  // // const char *  RSU_addr = "10.1.1.1";
   // Ptr<Socket> source = Socket::CreateSocket (c.Get (0), tid);
-  // InetSocketAddress remote = InetSocketAddress (Ipv4Address ("255.255.255.255"), 80);
+  // InetSocketAddress RSU = InetSocketAddress (i.GetAddress (1), 80);
   // source->SetAllowBroadcast (true);
-  // source->Connect (remote);
+  // source->Connect (RSU);
   // // source->SetRecvCallback (MakeCallback (&ReceivePacket));
+  // // WaveNetDevice 
 
-  // // check the CBR(channel busy ratio)
-  // // BsmApplication
+  //give socket to RSU and send broadcast message
+  Ptr<Socket> source = Socket::CreateSocket (c.Get (0), tid);
+  InetSocketAddress remote = InetSocketAddress (Ipv4Address ("255.255.255.255"), 80);
+  // source->SetAllowBroadcast (true);
+  source->Connect (remote);
+  // source->SetRecvCallback (MakeCallback (&ReceivePacket));
 
-  // Simulator::ScheduleWithContext (source->GetNode ()->GetId (),
-  //                                 Seconds (1.0), &GenerateTraffic,
-  //                                 source, packetSize, numPackets, interPacketInterval);
+  Simulator::ScheduleWithContext (source->GetNode ()->GetId (),
+                                  Seconds (1.0), &GenerateTraffic,
+                                  source, packetSize, numPackets, interPacketInterval);
 
-  origianl unicast code end */
+  // origianl unicast code end */
 
   AnimationInterface anim ("unicast.xml");
 
