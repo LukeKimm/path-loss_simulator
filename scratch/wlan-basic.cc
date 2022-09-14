@@ -5,6 +5,7 @@
 #include "ns3/mobility-module.h"
 #include "ns3/ipv4-global-routing-helper.h"
 #include "ns3/internet-module.h"
+#include "ns3/netanim-module.h"
 
 using namespace ns3;
 
@@ -29,7 +30,7 @@ int main (int argc, char *argv[])
 	// 2. Create PHY layer (wireless channel)
 	YansWifiChannelHelper channel = YansWifiChannelHelper::Default ();
 	YansWifiPhyHelper phy = YansWifiPhyHelper::Default ();
-	phy.SetChannel (???);			// To-do #1		Create and set wireless channel
+	phy.SetChannel (channel);			// To-do #1		Create and set wireless channel
 
 	// 3. Create MAC layer
 	WifiMacHelper mac;
@@ -45,7 +46,7 @@ int main (int argc, char *argv[])
 
 	// 5. Create NetDevices
 	NetDeviceContainer staDevice;
-	staDevice = wifi.Install (???, ???, ???);		// To-do #2		Install Station device
+	staDevice = wifi.Install (phy, mac, wifiStaNode);		// To-do #2		Install Station device
 
 	mac.SetType ("ns3::ApWifiMac",
 			"Ssid", SsidValue (ssid),
@@ -74,8 +75,8 @@ int main (int argc, char *argv[])
 	MobilityHelper mobility;
 	Ptr<ListPositionAllocator> positionAlloc = CreateObject<ListPositionAllocator> ();
 
-	positionAlloc->Add (???);			// To-do #3.	Add vector x=0, y=0, z=0
-	positionAlloc->Add (???);			// 						Add vector x=1, y=0, z=0
+	positionAlloc->Add (Vector (0.0, 0.0, 0.0));			// To-do #3.	Add vector x=0, y=0, z=0
+	positionAlloc->Add (Vector (1.0, 0.0, 0.0));			// 						Add vector x=1, y=0, z=0
 	mobility.SetPositionAllocator (positionAlloc);
 
 	mobility.SetMobilityModel ("ns3::ConstantPositionMobilityModel");
@@ -86,7 +87,7 @@ int main (int argc, char *argv[])
 	// 8. Create Transport layer (UDP)
 	/* Setting applications */
 	UdpServerHelper myServer (9);
-	ApplicationContainer serverApp = myServer.Install (???);		// To-do #4.	Install server app to the station node
+	ApplicationContainer serverApp = myServer.Install (wifiStaNode);		// To-do #4.	Install server app to the station node
 	serverApp.Start (Seconds (0.0));
 	serverApp.Stop (Seconds (simulationTime + 1));
 
@@ -98,6 +99,8 @@ int main (int argc, char *argv[])
 	ApplicationContainer clientApp = myClient.Install (wifiApNode.Get (0));
 	clientApp.Start (Seconds (1.0));
 	clientApp.Stop (Seconds (simulationTime + 1));
+
+	AnimationInterface anim ("wlan.xml");
 
 	// 9. Simulation Run and Calc. throughput
 	Simulator::Stop (Seconds (simulationTime + 1));
