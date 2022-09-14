@@ -184,12 +184,12 @@ int main (int argc, char *argv[])
   serverApps.Start (Seconds (1.0));
   serverApps.Stop (Seconds (10.0));
 
-  UdpEchoClientHelper echoClient (interfaces.GetAddress (1), 9);
-  echoClient.SetAttribute ("MaxPackets", UintegerValue (nPackets));
+  UdpEchoClientHelper echoClient (i.GetAddress (1), 9);
+  echoClient.SetAttribute ("MaxPackets", UintegerValue (1));
   echoClient.SetAttribute ("Interval", TimeValue (Seconds (1.0)));
   echoClient.SetAttribute ("PacketSize", UintegerValue (1024));
 
-  ApplicationContainer clientApps = echoClient.Install (nodes.Get (0));
+  ApplicationContainer clientApps = echoClient.Install (c.Get (0));
   clientApps.Start (Seconds (2.0));
   clientApps.Stop (Seconds (10.0));
 
@@ -224,11 +224,11 @@ int main (int argc, char *argv[])
   // // check the CBR(channel busy ratio)
   // // BsmApplication
 
-  origianl unicast code end */
+  // Simulator::ScheduleWithContext (source->GetNode ()->GetId (),
+  //                                 Seconds (1.0), &GenerateTraffic,
+  //                                 source, packetSize, numPackets, interPacketInterval);
 
-  Simulator::ScheduleWithContext (source->GetNode ()->GetId (),
-                                  Seconds (1.0), &GenerateTraffic,
-                                  source, packetSize, numPackets, interPacketInterval);
+  origianl unicast code end */
 
   AnimationInterface anim ("unicast.xml");
 
