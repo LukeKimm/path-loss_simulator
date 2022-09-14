@@ -47,6 +47,8 @@
 // #include "ns3/bsm-application.h"
 #include "ns3/random-variable-stream.h"
 #include "ns3/netanim-module.h"
+#include "ns3/point-to-point-module.h"
+#include "ns3/applications-module.h"
 
 #include "ns3/ocb-wifi-mac.h"
 #include "ns3/wifi-80211p-helper.h"
@@ -176,34 +178,53 @@ int main (int argc, char *argv[])
 
   TypeId tid = TypeId::LookupByName ("ns3::UdpSocketFactory");
 
-  // give sockets to nodes(OBU)
-  for (int j = 1; j < 46; j++){ 
-    Ptr<Socket> recvSink = Socket::CreateSocket (c.Get (j), tid);
-    InetSocketAddress local = InetSocketAddress (Ipv4Address::GetAny (), 80);
-    // InetSocketAddress local = InetSocketAddress (i.GetAddress (j + 1), 80);
-    // recvSink->SetAllowBroadcast (true);
-    recvSink->Bind (local);
-    recvSink->SetRecvCallback (MakeCallback (&ReceivePacket));
-  }
+  UdpEchoServerHelper echoServer (9);
 
-  // // unicast(setting RSU)
-  // // const char *  RSU_addr = "10.1.1.1";
+  ApplicationContainer serverApps = echoServer.Install (c.Get (1));
+  serverApps.Start (Seconds (1.0));
+  serverApps.Stop (Seconds (10.0));
+
+  UdpEchoClientHelper echoClient (interfaces.GetAddress (1), 9);
+  echoClient.SetAttribute ("MaxPackets", UintegerValue (nPackets));
+  echoClient.SetAttribute ("Interval", TimeValue (Seconds (1.0)));
+  echoClient.SetAttribute ("PacketSize", UintegerValue (1024));
+
+  ApplicationContainer clientApps = echoClient.Install (nodes.Get (0));
+  clientApps.Start (Seconds (2.0));
+  clientApps.Stop (Seconds (10.0));
+
+  /* original unicast code start
+
+  // // give sockets to nodes(OBU)
+  // for (int j = 1; j < 46; j++){ 
+  //   Ptr<Socket> recvSink = Socket::CreateSocket (c.Get (j), tid);
+  //   InetSocketAddress local = InetSocketAddress (Ipv4Address::GetAny (), 80);
+  //   // InetSocketAddress local = InetSocketAddress (i.GetAddress (j + 1), 80);
+  //   // recvSink->SetAllowBroadcast (true);
+  //   recvSink->Bind (local);
+  //   recvSink->SetRecvCallback (MakeCallback (&ReceivePacket));
+  // }
+
+  // // // unicast(setting RSU)
+  // // // const char *  RSU_addr = "10.1.1.1";
+  // // Ptr<Socket> source = Socket::CreateSocket (c.Get (0), tid);
+  // // InetSocketAddress RSU = InetSocketAddress (i.GetAddress (1), 80);
+  // // source->SetAllowBroadcast (true);
+  // // source->Connect (RSU);
+  // // // source->SetRecvCallback (MakeCallback (&ReceivePacket));
+  // // // WaveNetDevice 
+
+  // //give socket to RSU and send broadcast message
   // Ptr<Socket> source = Socket::CreateSocket (c.Get (0), tid);
-  // InetSocketAddress RSU = InetSocketAddress (i.GetAddress (1), 80);
+  // InetSocketAddress remote = InetSocketAddress (Ipv4Address ("255.255.255.255"), 80);
   // source->SetAllowBroadcast (true);
-  // source->Connect (RSU);
+  // source->Connect (remote);
   // // source->SetRecvCallback (MakeCallback (&ReceivePacket));
-  // // WaveNetDevice 
 
-  //give socket to RSU and send broadcast message
-  Ptr<Socket> source = Socket::CreateSocket (c.Get (0), tid);
-  InetSocketAddress remote = InetSocketAddress (Ipv4Address ("255.255.255.255"), 80);
-  source->SetAllowBroadcast (true);
-  source->Connect (remote);
-  // source->SetRecvCallback (MakeCallback (&ReceivePacket));
+  // // check the CBR(channel busy ratio)
+  // // BsmApplication
 
-  // check the CBR(channel busy ratio)
-  // BsmApplication
+  origianl unicast code end */
 
   Simulator::ScheduleWithContext (source->GetNode ()->GetId (),
                                   Seconds (1.0), &GenerateTraffic,
