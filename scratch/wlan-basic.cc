@@ -28,8 +28,9 @@ int main (int argc, char *argv[])
 	wifiApNode.Create (1);
 
 	// 2. Create PHY layer (wireless channel)
-	YansWifiChannelHelper channel = YansWifiChannelHelper::Default ();
+	YansWifiChannelHelper wifiChannel = YansWifiChannelHelper::Default ();
 	YansWifiPhyHelper phy = YansWifiPhyHelper::Default ();
+	Ptr<YansWifiChannel> channel = wifiChannel.Create ();
 	phy.SetChannel (channel);			// To-do #1		Create and set wireless channel
 
 	// 3. Create MAC layer
