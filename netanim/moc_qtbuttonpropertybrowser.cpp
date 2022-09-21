@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'qtbuttonpropertybrowser.h'
 **
-** Created by: The Qt Meta Object Compiler version 67 (Qt 5.12.8)
+** Created by: The Qt Meta Object Compiler version 67 (Qt 5.9.5)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
@@ -12,7 +12,7 @@
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'qtbuttonpropertybrowser.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 67
-#error "This file was generated using the moc from 5.12.8. It"
+#error "This file was generated using the moc from 5.9.5. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
 #endif
@@ -51,7 +51,7 @@ QT_MOC_LITERAL(8, 95, 11) // "slotToggled"
 static const uint qt_meta_data_QtButtonPropertyBrowser[] = {
 
  // content:
-       8,       // revision
+       7,       // revision
        0,       // classname
        0,    0, // classinfo
        5,   14, // methods
@@ -85,7 +85,7 @@ static const uint qt_meta_data_QtButtonPropertyBrowser[] = {
 void QtButtonPropertyBrowser::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     if (_c == QMetaObject::InvokeMetaMethod) {
-        auto *_t = static_cast<QtButtonPropertyBrowser *>(_o);
+        QtButtonPropertyBrowser *_t = static_cast<QtButtonPropertyBrowser *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
         case 0: _t->collapsed((*reinterpret_cast< QtBrowserItem*(*)>(_a[1]))); break;
@@ -98,14 +98,14 @@ void QtButtonPropertyBrowser::qt_static_metacall(QObject *_o, QMetaObject::Call 
     } else if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
         {
-            using _t = void (QtButtonPropertyBrowser::*)(QtBrowserItem * );
+            typedef void (QtButtonPropertyBrowser::*_t)(QtBrowserItem * );
             if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&QtButtonPropertyBrowser::collapsed)) {
                 *result = 0;
                 return;
             }
         }
         {
-            using _t = void (QtButtonPropertyBrowser::*)(QtBrowserItem * );
+            typedef void (QtButtonPropertyBrowser::*_t)(QtBrowserItem * );
             if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&QtButtonPropertyBrowser::expanded)) {
                 *result = 1;
                 return;
@@ -114,14 +114,10 @@ void QtButtonPropertyBrowser::qt_static_metacall(QObject *_o, QMetaObject::Call 
     }
 }
 
-QT_INIT_METAOBJECT const QMetaObject QtButtonPropertyBrowser::staticMetaObject = { {
-    &QtAbstractPropertyBrowser::staticMetaObject,
-    qt_meta_stringdata_QtButtonPropertyBrowser.data,
-    qt_meta_data_QtButtonPropertyBrowser,
-    qt_static_metacall,
-    nullptr,
-    nullptr
-} };
+const QMetaObject QtButtonPropertyBrowser::staticMetaObject = {
+    { &QtAbstractPropertyBrowser::staticMetaObject, qt_meta_stringdata_QtButtonPropertyBrowser.data,
+      qt_meta_data_QtButtonPropertyBrowser,  qt_static_metacall, nullptr, nullptr}
+};
 
 
 const QMetaObject *QtButtonPropertyBrowser::metaObject() const

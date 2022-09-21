@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'qtpropertybrowser.h'
 **
-** Created by: The Qt Meta Object Compiler version 67 (Qt 5.12.8)
+** Created by: The Qt Meta Object Compiler version 67 (Qt 5.9.5)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
@@ -12,7 +12,7 @@
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'qtpropertybrowser.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 67
-#error "This file was generated using the moc from 5.12.8. It"
+#error "This file was generated using the moc from 5.9.5. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
 #endif
@@ -53,7 +53,7 @@ QT_MOC_LITERAL(9, 110, 17) // "propertyDestroyed"
 static const uint qt_meta_data_QtAbstractPropertyManager[] = {
 
  // content:
-       8,       // revision
+       7,       // revision
        0,       // classname
        0,    0, // classinfo
        4,   14, // methods
@@ -81,7 +81,7 @@ static const uint qt_meta_data_QtAbstractPropertyManager[] = {
 void QtAbstractPropertyManager::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     if (_c == QMetaObject::InvokeMetaMethod) {
-        auto *_t = static_cast<QtAbstractPropertyManager *>(_o);
+        QtAbstractPropertyManager *_t = static_cast<QtAbstractPropertyManager *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
         case 0: _t->propertyInserted((*reinterpret_cast< QtProperty*(*)>(_a[1])),(*reinterpret_cast< QtProperty*(*)>(_a[2])),(*reinterpret_cast< QtProperty*(*)>(_a[3]))); break;
@@ -93,28 +93,28 @@ void QtAbstractPropertyManager::qt_static_metacall(QObject *_o, QMetaObject::Cal
     } else if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
         {
-            using _t = void (QtAbstractPropertyManager::*)(QtProperty * , QtProperty * , QtProperty * );
+            typedef void (QtAbstractPropertyManager::*_t)(QtProperty * , QtProperty * , QtProperty * );
             if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&QtAbstractPropertyManager::propertyInserted)) {
                 *result = 0;
                 return;
             }
         }
         {
-            using _t = void (QtAbstractPropertyManager::*)(QtProperty * );
+            typedef void (QtAbstractPropertyManager::*_t)(QtProperty * );
             if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&QtAbstractPropertyManager::propertyChanged)) {
                 *result = 1;
                 return;
             }
         }
         {
-            using _t = void (QtAbstractPropertyManager::*)(QtProperty * , QtProperty * );
+            typedef void (QtAbstractPropertyManager::*_t)(QtProperty * , QtProperty * );
             if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&QtAbstractPropertyManager::propertyRemoved)) {
                 *result = 2;
                 return;
             }
         }
         {
-            using _t = void (QtAbstractPropertyManager::*)(QtProperty * );
+            typedef void (QtAbstractPropertyManager::*_t)(QtProperty * );
             if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&QtAbstractPropertyManager::propertyDestroyed)) {
                 *result = 3;
                 return;
@@ -123,14 +123,10 @@ void QtAbstractPropertyManager::qt_static_metacall(QObject *_o, QMetaObject::Cal
     }
 }
 
-QT_INIT_METAOBJECT const QMetaObject QtAbstractPropertyManager::staticMetaObject = { {
-    &QObject::staticMetaObject,
-    qt_meta_stringdata_QtAbstractPropertyManager.data,
-    qt_meta_data_QtAbstractPropertyManager,
-    qt_static_metacall,
-    nullptr,
-    nullptr
-} };
+const QMetaObject QtAbstractPropertyManager::staticMetaObject = {
+    { &QObject::staticMetaObject, qt_meta_stringdata_QtAbstractPropertyManager.data,
+      qt_meta_data_QtAbstractPropertyManager,  qt_static_metacall, nullptr, nullptr}
+};
 
 
 const QMetaObject *QtAbstractPropertyManager::metaObject() const
@@ -215,7 +211,7 @@ QT_MOC_LITERAL(3, 46, 7) // "manager"
 static const uint qt_meta_data_QtAbstractEditorFactoryBase[] = {
 
  // content:
-       8,       // revision
+       7,       // revision
        0,       // classname
        0,    0, // classinfo
        1,   14, // methods
@@ -237,7 +233,7 @@ static const uint qt_meta_data_QtAbstractEditorFactoryBase[] = {
 void QtAbstractEditorFactoryBase::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     if (_c == QMetaObject::InvokeMetaMethod) {
-        auto *_t = static_cast<QtAbstractEditorFactoryBase *>(_o);
+        QtAbstractEditorFactoryBase *_t = static_cast<QtAbstractEditorFactoryBase *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
         case 0: _t->managerDestroyed((*reinterpret_cast< QObject*(*)>(_a[1]))); break;
@@ -246,14 +242,10 @@ void QtAbstractEditorFactoryBase::qt_static_metacall(QObject *_o, QMetaObject::C
     }
 }
 
-QT_INIT_METAOBJECT const QMetaObject QtAbstractEditorFactoryBase::staticMetaObject = { {
-    &QObject::staticMetaObject,
-    qt_meta_stringdata_QtAbstractEditorFactoryBase.data,
-    qt_meta_data_QtAbstractEditorFactoryBase,
-    qt_static_metacall,
-    nullptr,
-    nullptr
-} };
+const QMetaObject QtAbstractEditorFactoryBase::staticMetaObject = {
+    { &QObject::staticMetaObject, qt_meta_stringdata_QtAbstractEditorFactoryBase.data,
+      qt_meta_data_QtAbstractEditorFactoryBase,  qt_static_metacall, nullptr, nullptr}
+};
 
 
 const QMetaObject *QtAbstractEditorFactoryBase::metaObject() const
@@ -324,7 +316,7 @@ QT_MOC_LITERAL(13, 201, 23) // "slotPropertyDataChanged"
 static const uint qt_meta_data_QtAbstractPropertyBrowser[] = {
 
  // content:
-       8,       // revision
+       7,       // revision
        0,       // classname
        0,    0, // classinfo
        8,   14, // methods
@@ -364,7 +356,7 @@ static const uint qt_meta_data_QtAbstractPropertyBrowser[] = {
 void QtAbstractPropertyBrowser::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     if (_c == QMetaObject::InvokeMetaMethod) {
-        auto *_t = static_cast<QtAbstractPropertyBrowser *>(_o);
+        QtAbstractPropertyBrowser *_t = static_cast<QtAbstractPropertyBrowser *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
         case 0: _t->currentItemChanged((*reinterpret_cast< QtBrowserItem*(*)>(_a[1]))); break;
@@ -382,7 +374,7 @@ void QtAbstractPropertyBrowser::qt_static_metacall(QObject *_o, QMetaObject::Cal
     } else if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
         {
-            using _t = void (QtAbstractPropertyBrowser::*)(QtBrowserItem * );
+            typedef void (QtAbstractPropertyBrowser::*_t)(QtBrowserItem * );
             if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&QtAbstractPropertyBrowser::currentItemChanged)) {
                 *result = 0;
                 return;
@@ -391,14 +383,10 @@ void QtAbstractPropertyBrowser::qt_static_metacall(QObject *_o, QMetaObject::Cal
     }
 }
 
-QT_INIT_METAOBJECT const QMetaObject QtAbstractPropertyBrowser::staticMetaObject = { {
-    &QWidget::staticMetaObject,
-    qt_meta_stringdata_QtAbstractPropertyBrowser.data,
-    qt_meta_data_QtAbstractPropertyBrowser,
-    qt_static_metacall,
-    nullptr,
-    nullptr
-} };
+const QMetaObject QtAbstractPropertyBrowser::staticMetaObject = {
+    { &QWidget::staticMetaObject, qt_meta_stringdata_QtAbstractPropertyBrowser.data,
+      qt_meta_data_QtAbstractPropertyBrowser,  qt_static_metacall, nullptr, nullptr}
+};
 
 
 const QMetaObject *QtAbstractPropertyBrowser::metaObject() const

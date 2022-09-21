@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'animatorscene.h'
 **
-** Created by: The Qt Meta Object Compiler version 67 (Qt 5.12.8)
+** Created by: The Qt Meta Object Compiler version 67 (Qt 5.9.5)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
@@ -12,7 +12,7 @@
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'animatorscene.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 67
-#error "This file was generated using the moc from 5.12.8. It"
+#error "This file was generated using the moc from 5.9.5. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
 #endif
@@ -43,7 +43,7 @@ QT_MOC_LITERAL(2, 32, 0) // ""
 static const uint qt_meta_data_netanim__AnimatorScene[] = {
 
  // content:
-       8,       // revision
+       7,       // revision
        0,       // classname
        0,    0, // classinfo
        1,   14, // methods
@@ -65,7 +65,7 @@ static const uint qt_meta_data_netanim__AnimatorScene[] = {
 void netanim::AnimatorScene::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     if (_c == QMetaObject::InvokeMetaMethod) {
-        auto *_t = static_cast<AnimatorScene *>(_o);
+        AnimatorScene *_t = static_cast<AnimatorScene *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
         case 0: _t->testSlot(); break;
@@ -75,14 +75,10 @@ void netanim::AnimatorScene::qt_static_metacall(QObject *_o, QMetaObject::Call _
     Q_UNUSED(_a);
 }
 
-QT_INIT_METAOBJECT const QMetaObject netanim::AnimatorScene::staticMetaObject = { {
-    &QGraphicsScene::staticMetaObject,
-    qt_meta_stringdata_netanim__AnimatorScene.data,
-    qt_meta_data_netanim__AnimatorScene,
-    qt_static_metacall,
-    nullptr,
-    nullptr
-} };
+const QMetaObject netanim::AnimatorScene::staticMetaObject = {
+    { &QGraphicsScene::staticMetaObject, qt_meta_stringdata_netanim__AnimatorScene.data,
+      qt_meta_data_netanim__AnimatorScene,  qt_static_metacall, nullptr, nullptr}
+};
 
 
 const QMetaObject *netanim::AnimatorScene::metaObject() const

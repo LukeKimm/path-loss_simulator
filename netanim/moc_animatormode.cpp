@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'animatormode.h'
 **
-** Created by: The Qt Meta Object Compiler version 67 (Qt 5.12.8)
+** Created by: The Qt Meta Object Compiler version 67 (Qt 5.9.5)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
@@ -12,7 +12,7 @@
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'animatormode.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 67
-#error "This file was generated using the moc from 5.12.8. It"
+#error "This file was generated using the moc from 5.9.5. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
 #endif
@@ -89,7 +89,7 @@ QT_MOC_LITERAL(32, 558, 23) // "enableMousePositionSlot"
 static const uint qt_meta_data_netanim__AnimatorMode[] = {
 
  // content:
-       8,       // revision
+       7,       // revision
        0,       // classname
        0,    0, // classinfo
       31,   14, // methods
@@ -171,7 +171,7 @@ static const uint qt_meta_data_netanim__AnimatorMode[] = {
 void netanim::AnimatorMode::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     if (_c == QMetaObject::InvokeMetaMethod) {
-        auto *_t = static_cast<AnimatorMode *>(_o);
+        AnimatorMode *_t = static_cast<AnimatorMode *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
         case 0: _t->testSlot(); break;
@@ -210,14 +210,10 @@ void netanim::AnimatorMode::qt_static_metacall(QObject *_o, QMetaObject::Call _c
     }
 }
 
-QT_INIT_METAOBJECT const QMetaObject netanim::AnimatorMode::staticMetaObject = { {
-    &Mode::staticMetaObject,
-    qt_meta_stringdata_netanim__AnimatorMode.data,
-    qt_meta_data_netanim__AnimatorMode,
-    qt_static_metacall,
-    nullptr,
-    nullptr
-} };
+const QMetaObject netanim::AnimatorMode::staticMetaObject = {
+    { &Mode::staticMetaObject, qt_meta_stringdata_netanim__AnimatorMode.data,
+      qt_meta_data_netanim__AnimatorMode,  qt_static_metacall, nullptr, nullptr}
+};
 
 
 const QMetaObject *netanim::AnimatorMode::metaObject() const

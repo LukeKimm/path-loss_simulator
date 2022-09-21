@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'animpacket.h'
 **
-** Created by: The Qt Meta Object Compiler version 67 (Qt 5.12.8)
+** Created by: The Qt Meta Object Compiler version 67 (Qt 5.9.5)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
@@ -12,7 +12,7 @@
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'animpacket.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 67
-#error "This file was generated using the moc from 5.12.8. It"
+#error "This file was generated using the moc from 5.9.5. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
 #endif
@@ -42,7 +42,7 @@ QT_MOC_LITERAL(1, 29, 4) // "rect"
 static const uint qt_meta_data_netanim__AnimWirelessCircles[] = {
 
  // content:
-       8,       // revision
+       7,       // revision
        0,       // classname
        0,    0, // classinfo
        0,    0, // methods
@@ -63,7 +63,7 @@ void netanim::AnimWirelessCircles::qt_static_metacall(QObject *_o, QMetaObject::
 
 #ifndef QT_NO_PROPERTIES
     if (_c == QMetaObject::ReadProperty) {
-        auto *_t = static_cast<AnimWirelessCircles *>(_o);
+        AnimWirelessCircles *_t = static_cast<AnimWirelessCircles *>(_o);
         Q_UNUSED(_t)
         void *_v = _a[0];
         switch (_id) {
@@ -71,7 +71,7 @@ void netanim::AnimWirelessCircles::qt_static_metacall(QObject *_o, QMetaObject::
         default: break;
         }
     } else if (_c == QMetaObject::WriteProperty) {
-        auto *_t = static_cast<AnimWirelessCircles *>(_o);
+        AnimWirelessCircles *_t = static_cast<AnimWirelessCircles *>(_o);
         Q_UNUSED(_t)
         void *_v = _a[0];
         switch (_id) {
@@ -87,14 +87,10 @@ void netanim::AnimWirelessCircles::qt_static_metacall(QObject *_o, QMetaObject::
     Q_UNUSED(_a);
 }
 
-QT_INIT_METAOBJECT const QMetaObject netanim::AnimWirelessCircles::staticMetaObject = { {
-    &QObject::staticMetaObject,
-    qt_meta_stringdata_netanim__AnimWirelessCircles.data,
-    qt_meta_data_netanim__AnimWirelessCircles,
-    qt_static_metacall,
-    nullptr,
-    nullptr
-} };
+const QMetaObject netanim::AnimWirelessCircles::staticMetaObject = {
+    { &QObject::staticMetaObject, qt_meta_stringdata_netanim__AnimWirelessCircles.data,
+      qt_meta_data_netanim__AnimWirelessCircles,  qt_static_metacall, nullptr, nullptr}
+};
 
 
 const QMetaObject *netanim::AnimWirelessCircles::metaObject() const
@@ -119,7 +115,7 @@ int netanim::AnimWirelessCircles::qt_metacall(QMetaObject::Call _c, int _id, voi
         return _id;
     
 #ifndef QT_NO_PROPERTIES
-    if (_c == QMetaObject::ReadProperty || _c == QMetaObject::WriteProperty
+   if (_c == QMetaObject::ReadProperty || _c == QMetaObject::WriteProperty
             || _c == QMetaObject::ResetProperty || _c == QMetaObject::RegisterPropertyMetaType) {
         qt_static_metacall(this, _c, _id, _a);
         _id -= 1;
@@ -159,7 +155,7 @@ QT_MOC_LITERAL(1, 20, 3) // "pos"
 static const uint qt_meta_data_netanim__AnimPacket[] = {
 
  // content:
-       8,       // revision
+       7,       // revision
        0,       // classname
        0,    0, // classinfo
        0,    0, // methods
@@ -180,7 +176,7 @@ void netanim::AnimPacket::qt_static_metacall(QObject *_o, QMetaObject::Call _c, 
 
 #ifndef QT_NO_PROPERTIES
     if (_c == QMetaObject::ReadProperty) {
-        auto *_t = static_cast<AnimPacket *>(_o);
+        AnimPacket *_t = static_cast<AnimPacket *>(_o);
         Q_UNUSED(_t)
         void *_v = _a[0];
         switch (_id) {
@@ -188,7 +184,7 @@ void netanim::AnimPacket::qt_static_metacall(QObject *_o, QMetaObject::Call _c, 
         default: break;
         }
     } else if (_c == QMetaObject::WriteProperty) {
-        auto *_t = static_cast<AnimPacket *>(_o);
+        AnimPacket *_t = static_cast<AnimPacket *>(_o);
         Q_UNUSED(_t)
         void *_v = _a[0];
         switch (_id) {
@@ -204,14 +200,10 @@ void netanim::AnimPacket::qt_static_metacall(QObject *_o, QMetaObject::Call _c, 
     Q_UNUSED(_a);
 }
 
-QT_INIT_METAOBJECT const QMetaObject netanim::AnimPacket::staticMetaObject = { {
-    &QGraphicsObject::staticMetaObject,
-    qt_meta_stringdata_netanim__AnimPacket.data,
-    qt_meta_data_netanim__AnimPacket,
-    qt_static_metacall,
-    nullptr,
-    nullptr
-} };
+const QMetaObject netanim::AnimPacket::staticMetaObject = {
+    { &QGraphicsObject::staticMetaObject, qt_meta_stringdata_netanim__AnimPacket.data,
+      qt_meta_data_netanim__AnimPacket,  qt_static_metacall, nullptr, nullptr}
+};
 
 
 const QMetaObject *netanim::AnimPacket::metaObject() const
@@ -234,7 +226,7 @@ int netanim::AnimPacket::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         return _id;
     
 #ifndef QT_NO_PROPERTIES
-    if (_c == QMetaObject::ReadProperty || _c == QMetaObject::WriteProperty
+   if (_c == QMetaObject::ReadProperty || _c == QMetaObject::WriteProperty
             || _c == QMetaObject::ResetProperty || _c == QMetaObject::RegisterPropertyMetaType) {
         qt_static_metacall(this, _c, _id, _a);
         _id -= 1;

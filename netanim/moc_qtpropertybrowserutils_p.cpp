@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'qtpropertybrowserutils_p.h'
 **
-** Created by: The Qt Meta Object Compiler version 67 (Qt 5.12.8)
+** Created by: The Qt Meta Object Compiler version 67 (Qt 5.9.5)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
@@ -12,7 +12,7 @@
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'qtpropertybrowserutils_p.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 67
-#error "This file was generated using the moc from 5.12.8. It"
+#error "This file was generated using the moc from 5.9.5. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
 #endif
@@ -43,7 +43,7 @@ QT_MOC_LITERAL(2, 19, 0) // ""
 static const uint qt_meta_data_QtBoolEdit[] = {
 
  // content:
-       8,       // revision
+       7,       // revision
        0,       // classname
        0,    0, // classinfo
        1,   14, // methods
@@ -65,7 +65,7 @@ static const uint qt_meta_data_QtBoolEdit[] = {
 void QtBoolEdit::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     if (_c == QMetaObject::InvokeMetaMethod) {
-        auto *_t = static_cast<QtBoolEdit *>(_o);
+        QtBoolEdit *_t = static_cast<QtBoolEdit *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
         case 0: _t->toggled((*reinterpret_cast< bool(*)>(_a[1]))); break;
@@ -74,7 +74,7 @@ void QtBoolEdit::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
     } else if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
         {
-            using _t = void (QtBoolEdit::*)(bool );
+            typedef void (QtBoolEdit::*_t)(bool );
             if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&QtBoolEdit::toggled)) {
                 *result = 0;
                 return;
@@ -83,14 +83,10 @@ void QtBoolEdit::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
     }
 }
 
-QT_INIT_METAOBJECT const QMetaObject QtBoolEdit::staticMetaObject = { {
-    &QWidget::staticMetaObject,
-    qt_meta_stringdata_QtBoolEdit.data,
-    qt_meta_data_QtBoolEdit,
-    qt_static_metacall,
-    nullptr,
-    nullptr
-} };
+const QMetaObject QtBoolEdit::staticMetaObject = {
+    { &QWidget::staticMetaObject, qt_meta_stringdata_QtBoolEdit.data,
+      qt_meta_data_QtBoolEdit,  qt_static_metacall, nullptr, nullptr}
+};
 
 
 const QMetaObject *QtBoolEdit::metaObject() const
@@ -156,7 +152,7 @@ QT_MOC_LITERAL(5, 62, 17) // "slotClearShortcut"
 static const uint qt_meta_data_QtKeySequenceEdit[] = {
 
  // content:
-       8,       // revision
+       7,       // revision
        0,       // classname
        0,    0, // classinfo
        3,   14, // methods
@@ -186,7 +182,7 @@ static const uint qt_meta_data_QtKeySequenceEdit[] = {
 void QtKeySequenceEdit::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     if (_c == QMetaObject::InvokeMetaMethod) {
-        auto *_t = static_cast<QtKeySequenceEdit *>(_o);
+        QtKeySequenceEdit *_t = static_cast<QtKeySequenceEdit *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
         case 0: _t->keySequenceChanged((*reinterpret_cast< const QKeySequence(*)>(_a[1]))); break;
@@ -197,7 +193,7 @@ void QtKeySequenceEdit::qt_static_metacall(QObject *_o, QMetaObject::Call _c, in
     } else if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
         {
-            using _t = void (QtKeySequenceEdit::*)(const QKeySequence & );
+            typedef void (QtKeySequenceEdit::*_t)(const QKeySequence & );
             if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&QtKeySequenceEdit::keySequenceChanged)) {
                 *result = 0;
                 return;
@@ -206,14 +202,10 @@ void QtKeySequenceEdit::qt_static_metacall(QObject *_o, QMetaObject::Call _c, in
     }
 }
 
-QT_INIT_METAOBJECT const QMetaObject QtKeySequenceEdit::staticMetaObject = { {
-    &QWidget::staticMetaObject,
-    qt_meta_stringdata_QtKeySequenceEdit.data,
-    qt_meta_data_QtKeySequenceEdit,
-    qt_static_metacall,
-    nullptr,
-    nullptr
-} };
+const QMetaObject QtKeySequenceEdit::staticMetaObject = {
+    { &QWidget::staticMetaObject, qt_meta_stringdata_QtKeySequenceEdit.data,
+      qt_meta_data_QtKeySequenceEdit,  qt_static_metacall, nullptr, nullptr}
+};
 
 
 const QMetaObject *QtKeySequenceEdit::metaObject() const
