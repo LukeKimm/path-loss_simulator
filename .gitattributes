@@ -1,1 +1,4 @@
-*.xml filter=lfs diff=lfs merge=lfs -text
+*.c linguist-detectable=false
+*.perl linguist-detectable=false
+*.makefile linguist-detectable=false
+*.m linguist-detectable=false
