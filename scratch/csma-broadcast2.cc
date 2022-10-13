@@ -58,7 +58,7 @@ main (int argc, char *argv[])
   CommandLine cmd (__FILE__);
   cmd.Parse (argc, argv);
 
-  std::string animFile = "csma-broadcast.xml" ;  // Name of file for animation output
+  // std::string animFile = "csma-broadcast.xml" ;  // Name of file for animation output
 
   NS_LOG_INFO ("Create nodes.");
   NodeContainer c;
@@ -120,11 +120,15 @@ main (int argc, char *argv[])
   // The output files will be named 
   // csma-broadcast-<nodeId>-<interfaceId>.pcap
   // and can be read by the "tcpdump -tt -r" command 
-  csma.EnablePcapAll ("csma-broadcast", false);
 
-  AnimationInterface anim (animFile);
+  // csma.EnablePcapAll ("csma-broadcast", false);
+
+  AnimationInterface anim ("csma-broadcast.xml");
+  
   NS_LOG_INFO ("Run Simulation.");
+  
   Simulator::Run ();
   Simulator::Destroy ();
+  
   NS_LOG_INFO ("Done.");
 }
