@@ -96,40 +96,6 @@ float ITT_calculation (int VD)
   return itt;
 }
 
-float mod_ITT (float ITT) {
-
-    float CBR;
-    int VD = vechicle_density;
-    float X;  
-    float a;
-
-    CBR = ITT / 1;
-
-    X = CBR * VD;
-
-    int congestion_level;
-    if (X <= 6.5) {
-        congestion_level = 1;
-        printf("congestion_level: %d", congestion_level);
-        return a = 0.1;
-    } else if (6.5 < X <= 14) {
-        congestion_level = 2;
-        printf("congestion_level: %d", congestion_level);
-        return a = 0.334;
-    } else if (14 < X <= 25.5) {
-        congestion_level = 3;
-        printf("congestion_level: %d", congestion_level);
-        return a = 0.5;
-    } else {
-        congestion_level = 4;
-        printf("congestion_level: %d", congestion_level);
-        return a = 1;
-    };
-
-    return a;
-    printf (a);
-}
-
 void ReceivePacket_PVD (Ptr<Socket> socket)
 {
   while (socket->Recv ())
@@ -270,8 +236,6 @@ int main (int argc, char *argv[])
   printf(vehicle_density);
   float Itt = ITT_calculation(vehicle_density);  //vechicle_density = 50
   printf(Itt);  //Itt = 50/250 = 0.2
-  float mod_Itt = mod_ITT (Itt);
-  printf(mod_Itt);
 
   int m = 0;
   // 50대 itt 0.4 50*0.05 = 2.5이므로 불가 // 25대 itt 0.2 25*0.005 = 0.05*2 = 0.1 가능!, 10대 itt 0.1 10*0.0025 =0.025초*5 0.125초 가능!
@@ -336,6 +300,40 @@ while(m<1)
     }
     m++;
   }  
+
+  float mod_ITT (float ITT) {
+
+    float CBR;
+    int VD = vehicle_density;
+    float X;  
+    float a;
+
+    CBR = ITT / 1;
+
+    X = CBR * VD;
+
+    int congestion_level;
+    if (X <= 6.5) {
+        congestion_level = 1;
+        printf("congestion_level: %d", congestion_level);
+        return a = 0.1;
+    } else if (6.5 < X <= 14) {
+        congestion_level = 2;
+        printf("congestion_level: %d", congestion_level);
+        return a = 0.334;
+    } else if (14 < X <= 25.5) {
+        congestion_level = 3;
+        printf("congestion_level: %d", congestion_level);
+        return a = 0.5;
+    } else {
+        congestion_level = 4;
+        printf("congestion_level: %d", congestion_level);
+        return a = 1;
+    };
+
+    return a;
+    printf (a);
+  }
 
   mod_ITT (Itt);
 
