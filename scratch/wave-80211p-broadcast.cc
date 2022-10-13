@@ -173,7 +173,7 @@ int main (int argc, char *argv[])
 
   for(int i =0; i<ROW; i++)
   {
-    for(int j=0;j<COLUMN;j++)
+    for(int j=0; j<COLUMN; j++)
       positionAlloc->Add (Vector (10.0*j, 10.0*(i+1), 0.0));
   }
   mobility.SetPositionAllocator (positionAlloc);

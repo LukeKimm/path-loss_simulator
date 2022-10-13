@@ -89,11 +89,35 @@ NS_LOG_COMPONENT_DEFINE ("WifiSimpleOcb");
 
 // PVD
 
-double ITT_calculation (int VD)
+float ITT_calculation (int VD)
 {
-  double itt;
+  float itt;
   itt = VD/250;
   return itt;
+}
+
+float mod_ITT (float ITT) {
+
+    float CBR;
+    int VD = vechicle_density;
+    float X;
+    float a;
+
+    CBR = ITT / 1;
+
+    X = CBR * VD;
+
+    if (X <= 6.5) {
+        return a = 0.1;
+    } else if (6.5 < X <= 14) {
+        return a = 0.334;
+    } else if (14 < X <= 25.5) {
+        return a = 0.5;
+    } else {
+        return a = 1;
+    };
+
+    return a;
 }
 
 void ReceivePacket_PVD (Ptr<Socket> socket)
@@ -135,7 +159,7 @@ int main (int argc, char *argv[])
   uint32_t packetSize = 1000; // bytes
   uint32_t numPackets = 1;
   std::string animFile = "wave-80211p.xml" ;  // Name of file for animation output
-  double interval = 1.0; // seconds
+  float interval = 1.0; // seconds
   bool verbose = false;
 
   CommandLine cmd (__FILE__);
@@ -232,8 +256,13 @@ int main (int argc, char *argv[])
 /// 50개씩 감! --->> BSM Broadcast Success
   // InetSocketAddress remote = InetSocketAddress (Ipv4Address("255.255.255.255"), 80 );
   int grouping = 2;
-  int vehicle_density = 1000/(Distance*grouping);
-  double Itt = ITT_calculation(vehicle_density);
+  int vehicle_density = 1000/(Distance*grouping);  //distance = 10
+  printf(vehicle_density);
+  float Itt = ITT_calculation(vehicle_density);  //vechicle_density = 50
+  printf(Itt);  //Itt = 50/250 = 0.2
+  float mod_Itt = mod_ITT (Itt);
+  printf(mod_Itt);
+
   int m = 0;
   // 50대 itt 0.4 50*0.05 = 2.5이므로 불가 // 25대 itt 0.2 25*0.005 = 0.05*2 = 0.1 가능!, 10대 itt 0.1 10*0.0025 =0.025초*5 0.125초 가능!
   // 2분할로 나누어 25대씩 가져가고 VD =50, itt 0.2, 전체 소요되는 채널 이용시간 0.1 => 채널 혼잡도 50%
