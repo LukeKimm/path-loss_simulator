@@ -40,6 +40,7 @@
 #include "ns3/netanim-module.h"
 #include "ns3/mobility-model.h"
 #include "ns3/mobility-helper.h"
+#include "ns3/position-allocator.h"
 
 using namespace ns3;
 
@@ -80,6 +81,8 @@ main (int argc, char *argv[])
   NetDeviceContainer n1 = csma.Install (c1);
 
   // add mobility model for animation
+  MobilityHelper mobility;
+  Ptr<ListPositionAllocator> positionAlloc = CreateObject<ListPositionAllocator> ();
   positionAlloc->Add (Vector (0.0, 0.0, 0.0));
   for (int i = 0; i < 3; i++) {
     positionAlloc->Add (Vector (i*2.0, 1.0, 0.0));
