@@ -88,7 +88,7 @@ main (int argc, char *argv[])
     positionAlloc->Add (Vector (i*2.0, 1.0, 0.0));
     mobility.SetPositionAllocator (positionAlloc);
     mobility.SetMobilityModel ("ns3::ConstantPositionMobilityModel");
-    mobility.Install (nodes);
+    mobility.Install (c);
   }
 
   InternetStackHelper internet;
