@@ -38,6 +38,8 @@
 #include "ns3/applications-module.h"
 #include "ns3/internet-module.h"
 #include "ns3/netanim-module.h"
+#include "ns3/mobility-model.h"
+#include "ns3/mobility-helper.h"
 
 using namespace ns3;
 
@@ -63,6 +65,8 @@ main (int argc, char *argv[])
   NS_LOG_INFO ("Create nodes.");
   NodeContainer c;
   c.Create (3);
+
+  // c0, c1 두개로 나누어서 전송로 구성
   NodeContainer c0 = NodeContainer (c.Get (0), c.Get (1));
   NodeContainer c1 = NodeContainer (c.Get (0), c.Get (2));
 
@@ -71,14 +75,25 @@ main (int argc, char *argv[])
   csma.SetChannelAttribute ("DataRate", DataRateValue (DataRate (5000000)));
   csma.SetChannelAttribute ("Delay", TimeValue (MilliSeconds (2)));
 
+  // n0, n1 두개로 나누어서 전송로 구성
   NetDeviceContainer n0 = csma.Install (c0);
   NetDeviceContainer n1 = csma.Install (c1);
+
+  // add mobility model for animation
+  positionAlloc->Add (Vector (0.0, 0.0, 0.0));
+  for (int i = 0; i < 3; i++) {
+    positionAlloc->Add (Vector (i*2.0, 1.0, 0.0));
+    mobility.SetPositionAllocator (positionAlloc);
+    mobility.SetMobilityModel ("ns3::ConstantPositionMobilityModel");
+    mobility.Install (nodes);
+  }
 
   InternetStackHelper internet;
   internet.Install (c);
 
   NS_LOG_INFO ("Assign IP Addresses.");
   Ipv4AddressHelper ipv4;
+  // ip를 n0, n1 두개로 나누어서 할당한다. 
   ipv4.SetBase ("10.1.0.0", "255.255.255.0");
   ipv4.Assign (n0);
   ipv4.SetBase ("192.168.1.0", "255.255.255.0");
@@ -121,7 +136,7 @@ main (int argc, char *argv[])
   // csma-broadcast-<nodeId>-<interfaceId>.pcap
   // and can be read by the "tcpdump -tt -r" command 
 
-  // csma.EnablePcapAll ("csma-broadcast", false);
+  csma.EnablePcapAll ("csma-broadcast", false);
 
   AnimationInterface anim ("csma-broadcast.xml");
   
