@@ -37,7 +37,7 @@ main (int argc, char *argv[])
   NS_LOG_INFO ("Create nodes.");
   NodeContainer c;
   //node 100개로 생성
-  c.Create (100);
+  c.Create (101);
 
 //   // c0, c1 두개로 나누어서 전송로 구성
 //   NodeContainer c0 = NodeContainer (c.Get (0), c.Get (1));
@@ -47,6 +47,7 @@ main (int argc, char *argv[])
   CsmaHelper csma;
   csma.SetChannelAttribute ("DataRate", DataRateValue (DataRate (5000000)));
   csma.SetChannelAttribute ("Delay", TimeValue (MilliSeconds (2)));
+  // csma.SetChannelAttribute ("Delay", TimeValue (Seconds (0.5)));
 
 //   // n0, n1 두개로 나누어서 전송로 구성
 //   NetDeviceContainer n0 = csma.Install (c0);
@@ -105,22 +106,22 @@ main (int argc, char *argv[])
   //c0에 packetsinkhelper를 install하고 
   app = sink.Install (c.Get (0));
   // c1은 add하고 packetsinkhelper를 install 한 이유?
-  app.Add (sink.Install (c.Get (0)));
+  // app.Add (sink.Install (c.Get (0)));
   app.Start (Seconds (1.0));
   app.Stop (Seconds (10.0));
 
-  // Configure ascii tracing of all enqueue, dequeue, and NetDevice receive 
-  // events on all devices.  Trace output will be sent to the file 
-  // "csma-one-subnet.tr"
-  AsciiTraceHelper ascii;
-  csma.EnableAsciiAll (ascii.CreateFileStream ("csma-broadcast.tr"));
+  // // Configure ascii tracing of all enqueue, dequeue, and NetDevice receive 
+  // // events on all devices.  Trace output will be sent to the file 
+  // // "csma-one-subnet.tr"
+  // AsciiTraceHelper ascii;
+  // csma.EnableAsciiAll (ascii.CreateFileStream ("csma-broadcast.tr"));
 
-  // Also configure some tcpdump traces; each interface will be traced
-  // The output files will be named 
-  // csma-broadcast-<nodeId>-<interfaceId>.pcap
-  // and can be read by the "tcpdump -tt -r" command 
+  // // Also configure some tcpdump traces; each interface will be traced
+  // // The output files will be named 
+  // // csma-broadcast-<nodeId>-<interfaceId>.pcap
+  // // and can be read by the "tcpdump -tt -r" command 
 
-  csma.EnablePcapAll ("csma-broadcast", false);
+  // csma.EnablePcapAll ("csma-broadcast", false);
 
   AnimationInterface anim ("csma-broadcast.xml");
   
