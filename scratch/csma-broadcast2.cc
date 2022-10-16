@@ -111,6 +111,7 @@ main (int argc, char *argv[])
   // Create the OnOff application to send UDP datagrams of size
   // 512 bytes (default) at a rate of 500 Kb/s (default) from n0
   NS_LOG_INFO ("Create Applications.");
+  // onoffhelper의 역할이 무엇인가??
   OnOffHelper onoff ("ns3::UdpSocketFactory", 
                      Address (InetSocketAddress (Ipv4Address ("255.255.255.255"), port)));
   onoff.SetConstantRate (DataRate ("500kb/s"));
