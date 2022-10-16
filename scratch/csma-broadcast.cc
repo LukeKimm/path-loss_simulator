@@ -1,32 +1,3 @@
-/* -*- Mode:C++; c-file-style:"gnu"; indent-tabs-mode:nil; -*- */
-/*
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License version 2 as
- * published by the Free Software Foundation;
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- */
-
-//
-// Example of the sending of a datagram to a broadcast address
-//
-// Network topology
-//     ==============
-//       |          |
-//       n0    n1   n2
-//       |     |
-//     ==========
-//
-//   n0 originates UDP broadcast to 255.255.255.255/discard port, which 
-//   is replicated and received on both n1 and n2
-
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -65,30 +36,36 @@ main (int argc, char *argv[])
 
   NS_LOG_INFO ("Create nodes.");
   NodeContainer c;
-  c.Create (3);
+  //node 100개로 생성
+  c.Create (100);
 
-  // c0, c1 두개로 나누어서 전송로 구성
-  NodeContainer c0 = NodeContainer (c.Get (0), c.Get (1));
-  NodeContainer c1 = NodeContainer (c.Get (0), c.Get (2));
+//   // c0, c1 두개로 나누어서 전송로 구성
+//   NodeContainer c0 = NodeContainer (c.Get (0), c.Get (1));
+//   NodeContainer c1 = NodeContainer (c.Get (0), c.Get (2));
 
   NS_LOG_INFO ("Build Topology.");
   CsmaHelper csma;
   csma.SetChannelAttribute ("DataRate", DataRateValue (DataRate (5000000)));
   csma.SetChannelAttribute ("Delay", TimeValue (MilliSeconds (2)));
 
-  // n0, n1 두개로 나누어서 전송로 구성
-  NetDeviceContainer n0 = csma.Install (c0);
-  NetDeviceContainer n1 = csma.Install (c1);
+//   // n0, n1 두개로 나누어서 전송로 구성
+//   NetDeviceContainer n0 = csma.Install (c0);
+//   NetDeviceContainer n1 = csma.Install (c1);
+  NetDeviceContainer n = csma.Install (c);
+  
+
 
   // add mobility model for animation
   MobilityHelper mobility;
   Ptr<ListPositionAllocator> positionAlloc = CreateObject<ListPositionAllocator> ();
   positionAlloc->Add (Vector (0.0, 0.0, 0.0));
-  for (int i = 0; i < 3; i++) {
-    positionAlloc->Add (Vector (i*2.0, 1.0, 0.0));
-    mobility.SetPositionAllocator (positionAlloc);
-    mobility.SetMobilityModel ("ns3::ConstantPositionMobilityModel");
-    mobility.Install (c);
+  for (int i = 0; i < 10; i++){
+    for (int k = 0; k < 10; k++){
+      positionAlloc->Add (Vector (i*1.0, k*1.0, 0.0));
+      mobility.SetPositionAllocator (positionAlloc);
+      mobility.SetMobilityModel ("ns3::ConstantPositionMobilityModel");
+      mobility.Install (c);
+    }
   }
 
   InternetStackHelper internet;
@@ -98,9 +75,9 @@ main (int argc, char *argv[])
   Ipv4AddressHelper ipv4;
   // ip를 n0, n1 두개로 나누어서 할당한다. 
   ipv4.SetBase ("10.1.0.0", "255.255.255.0");
-  ipv4.Assign (n0);
-  ipv4.SetBase ("192.168.1.0", "255.255.255.0");
-  ipv4.Assign (n1);
+  ipv4.Assign (n);
+//   ipv4.SetBase ("192.168.1.0", "255.255.255.0");
+//   ipv4.Assign (n1);
 
 
   // RFC 863 discard port ("9") indicates packet should be thrown away
@@ -116,16 +93,19 @@ main (int argc, char *argv[])
                      Address (InetSocketAddress (Ipv4Address ("255.255.255.255"), port)));
   onoff.SetConstantRate (DataRate ("500kb/s"));
 
-  ApplicationContainer app = onoff.Install (c0.Get (0));
-  // Start the application
-  app.Start (Seconds (1.0));
-  app.Stop (Seconds (10.0));
+  //c0는 onoff install하고 
+  ApplicationContainer app = onoff.Install (c.Get (0));
+//   // Start the application
+//   app.Start (Seconds (1.0));
+//   app.Stop (Seconds (10.0));
 
   // Create an optional packet sink to receive these packets
   PacketSinkHelper sink ("ns3::UdpSocketFactory",
                          Address (InetSocketAddress (Ipv4Address::GetAny (), port)));
-  app = sink.Install (c0.Get (1));
-  app.Add (sink.Install (c1.Get (1)));
+  //c0에 packetsinkhelper를 install하고 
+  app = sink.Install (c.Get (0));
+  // c1은 add하고 packetsinkhelper를 install 한 이유?
+  app.Add (sink.Install (c.Get (0)));
   app.Start (Seconds (1.0));
   app.Stop (Seconds (10.0));
 
