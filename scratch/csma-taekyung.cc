@@ -94,18 +94,18 @@ main (int argc, char *argv[])
                      Address (InetSocketAddress (Ipv4Address ("255.255.255.255"), port)));
   onoff.SetConstantRate (DataRate ("500kb/s"));
 
-  //c0는 onoff install하고 
+  //c는 onoff install하고 
   ApplicationContainer app = onoff.Install (c.Get (0));
 //   // Start the application
 //   app.Start (Seconds (1.0));
 //   app.Stop (Seconds (10.0));
 
   // Create an optional packet sink to receive these packets
+  // packetsinkhelper의 역할이 무엇?
   PacketSinkHelper sink ("ns3::UdpSocketFactory",
                          Address (InetSocketAddress (Ipv4Address::GetAny (), port)));
-  //c0에 packetsinkhelper를 install하고 
+  //c에 packetsinkhelper를 install하고 
   app = sink.Install (c.Get (0));
-  // c1은 add하고 packetsinkhelper를 install 한 이유?
   // app.Add (sink.Install (c.Get (0)));
   app.Start (Seconds (1.0));
   app.Stop (Seconds (10.0));
