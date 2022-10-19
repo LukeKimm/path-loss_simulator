@@ -56,10 +56,10 @@ PvdApplication::PvdApplication ()
     m_wavePacketSize (448), // packet size: 기존에 자료조사된 논문의 내용을 기반으로 수정
     m_numWavePackets (1), // packet number: 1 packet per 1 second
     m_waveInterval (MilliSeconds (1000)), // packet interval: send every 1 second
-    m_gpsAccuracyNs (10000),
-    m_adhocTxInterfaces (0),
+    // m_gpsAccuracyNs (10000),
+    // m_adhocTxInterfaces (0),
     // m_nodesMoving (0), // node의 움직임은 pvd message상에서 필요없으므로 제거
-    m_unirv (0), // gps sync를 위해서 필요한 값
+    // m_unirv (0), // gps sync를 위해서 필요한 값
     m_nodeId (0),
     m_chAccessMode (0),
     m_txMaxDelay (MilliSeconds (10)),
