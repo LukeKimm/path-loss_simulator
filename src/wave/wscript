@@ -18,7 +18,7 @@ def build(bld):
         'model/channel-manager.cc',
         'model/vsa-manager.cc',
         'model/bsm-application.cc',
-        # 'model/pvd-application.cc',
+        'model/pvd-application.cc',
         'model/higher-tx-tag.cc',
         'model/wave-net-device.cc',
         'helper/wave-bsm-stats.cc',
@@ -28,7 +28,7 @@ def build(bld):
         'helper/wave-helper.cc',
         'helper/wifi-80211p-helper.cc',
         'helper/wave-bsm-helper.cc',
-        # 'helper/wave-pvd-helper.cc'
+        'helper/wave-pvd-helper.cc'
         ]
 
     module_test = bld.create_ns3_module_test_library('wave')
@@ -57,7 +57,7 @@ def build(bld):
         'model/higher-tx-tag.h',
         'model/wave-net-device.h',
         'model/bsm-application.h',
-        # 'model/pvd-application.h',
+        'model/pvd-application.h',
         'helper/wave-bsm-stats.h',
         # 아래 파일은 build하는데 문제가 없다. 
         'helper/wave-pvd-stats.h',
@@ -65,7 +65,7 @@ def build(bld):
         'helper/wave-helper.h',
         'helper/wifi-80211p-helper.h',
         'helper/wave-bsm-helper.h',
-        # 'helper/wave-pvd-helper.h'
+        'helper/wave-pvd-helper.h'
         ]
 
     if bld.env.ENABLE_EXAMPLES:

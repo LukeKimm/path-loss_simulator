@@ -203,18 +203,23 @@ PvdApplication::Setup (Ipv4InterfaceContainer & i,
   m_wavePacketSize = wavePacketSize;
   m_waveInterval = waveInterval;
   m_gpsAccuracyNs = gpsAccuracyNs;
-  int size = rangesSq.size ();
+  // m_txSafetyRangesSq.resize (size, 0)에 사용되는 인자로 삭제
+  // int size = rangesSq.size ();
   m_wavePvdStats = wavePvdStats;
-  m_nodesMoving = nodesMoving;
+  // 사용하지 않는 내용 삭제
+  // m_nodesMoving = nodesMoving;
   m_chAccessMode = chAccessMode;
-  m_txSafetyRangesSq.clear ();
-  m_txSafetyRangesSq.resize (size, 0);
+  // 사용하지 않는 내용 삭제
+  // m_txSafetyRangesSq.clear ();
+  // m_txSafetyRangesSq.resize (size, 0);
 
-  for (int index = 0; index < size; index++)
-    {
-      // stored as square of value, for optimization
-      m_txSafetyRangesSq[index] = rangesSq[index];
-    }
+  /* 사용하지 않는 내용 삭제
+  // for (int index = 0; index < size; index++)
+  //   {
+  //     // stored as square of value, for optimization
+  //     m_txSafetyRangesSq[index] = rangesSq[index];
+  //   }
+  */
 
   m_adhocTxInterfaces = &i;
   m_nodeId = nodeId;
@@ -240,6 +245,7 @@ PvdApplication::GenerateWaveTraffic (Ptr<Socket> socket, uint32_t pktSize,
       Ptr<MobilityModel> txPosition = txNode->GetObject<MobilityModel> ();
       NS_ASSERT (txPosition != 0);
 
+      /* 사용하지 않는 내용 삭제
       int senderMoving = m_nodesMoving->at (txNodeId);
       if (senderMoving != 0)
         {
@@ -291,6 +297,7 @@ PvdApplication::GenerateWaveTraffic (Ptr<Socket> socket, uint32_t pktSize,
                 }
             }
         }
+      */
 
       // every PVD must be scheduled with a tx time delay
       // of +/- (5) ms.  See comments in StartApplication().
@@ -355,7 +362,11 @@ void PvdApplication::HandleReceivedPvdPacket (Ptr<Node> txNode,
   // has also started moving in the scenario
   // if it has not started moving, then
   // it is not a candidate to receive a packet
-  int rxNodeId = rxNode->GetId ();
+
+  // int receiverMoving = m_nodesMoving->at (rxNodeId);에 사용되는 인자로 삭제
+  // int rxNodeId = rxNode->GetId ();
+
+  /* 사용하지 않는 내용 삭제
   int receiverMoving = m_nodesMoving->at (rxNodeId);
   if (receiverMoving == 1)
     {
@@ -372,6 +383,7 @@ void PvdApplication::HandleReceivedPvdPacket (Ptr<Node> txNode,
             }
         }
     }
+  */
 }
 
 int64_t
@@ -408,36 +420,4 @@ PvdApplication::GetNetDevice (int id)
 
   return device;
 }
-
-void PvdApplication::ifCCAbusy(uint32_t nodeID)
-{
-   Ptr<WifiNetDevice> device = DynamicCast<WifiNetDevice>(GetNode(nodeID)->GetDevice(0));
-   // more than 1 device can be at each node so take the 1st one
-
-   Ptr<WifiPhy> phy = device->GetPhy ();
-
-   Ptr <YansWifiPhy> wfc = phy->GetObject<YansWifiPhy> ();
-
-   // Ptr <WifiPhyStateHelper> statehelper = phy->GetState();
-
-   PointerValue ptr;
-   wfc->GetAttribute("State", ptr);
-   Ptr<WifiPhyStateHelper> wpsh = ptr.Get<WifiPhyStateHelper>();
-
-   std::cerr<<"CCA state for node "<<nodeID<<" is "<<wpsh->IsStateCcaBusy()()<<std::endl;
-
-   if (wpsh->IsStateCcaBusy() == true )
-   {
-     CBRTime[nodeID].push_back(1);
-   }
-   else
-   {
-     CBRTime[nodeID].push_back(0);
-   }
-
-   CBRreviewInstants[nodeID] = Simulator::Schedule (//recvSink->GetNode ()->GetId (), //BIPLAV
-                                     CBRcheckInterval, &PvdApplication::ifCCAbusy, this,
-                                     nodeID);
-}
-
 } // namespace ns3
