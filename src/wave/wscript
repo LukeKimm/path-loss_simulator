@@ -22,7 +22,6 @@ def build(bld):
         'model/higher-tx-tag.cc',
         'model/wave-net-device.cc',
         'helper/wave-bsm-stats.cc',
-        # 아래 파일은 build하는데 문제가 없다. 
         'helper/wave-pvd-stats.cc',
         'helper/wave-mac-helper.cc',
         'helper/wave-helper.cc',
@@ -59,7 +58,6 @@ def build(bld):
         'model/bsm-application.h',
         'model/pvd-application.h',
         'helper/wave-bsm-stats.h',
-        # 아래 파일은 build하는데 문제가 없다. 
         'helper/wave-pvd-stats.h',
         'helper/wave-mac-helper.h',
         'helper/wave-helper.h',
